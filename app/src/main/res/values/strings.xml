@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ALC4Phase1</string>
+    <string name="label_btn_profile">My Profile</string>
+    <string name="label_btn_about">About Alc</string>
+    <string name="label_tv_main">Welcome to ALC 4.0</string>
+    <string name="label_tv_phone_number">Phone Number:</string>
+    <string name="label_tv_email">Email:</string>
+    <string name="label_tv_country">Country:</string>
+    <string name="label_tv_track">Track:</string>
+    <string name="label_tv_username">Slack Username:</string>
+    <string name="des_profile_image">profile_image</string>
+    <string name="andela_about_page_url">https://andela.com/alc/</string>
+    <string name="connectivty_error">No Internet connection</string>
+</resources>
