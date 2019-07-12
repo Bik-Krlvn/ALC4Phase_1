@@ -1,10 +1,12 @@
 package com.birikorang_kelvin_proj.alc4phase1
 
 import android.annotation.SuppressLint
+import android.net.http.SslError
 import android.os.Bundle
 import android.view.View
 import android.webkit.*
 import android.widget.ProgressBar
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.birikorang_kelvin_proj.alc4phase1.utils.NetworkStateUtil
 import com.google.android.material.snackbar.Snackbar
@@ -16,6 +18,7 @@ class AboutActivity : AppCompatActivity() {
     private var webView: WebView? = null
     private var loadingProgress: ProgressBar? = null
     private var snackBar: Snackbar? = null
+    private var alertBuilder:AlertDialog.Builder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +54,22 @@ class AboutActivity : AppCompatActivity() {
                 showProgress(false)
             }
 
+            override fun onReceivedSslError(view: WebView?, handler: SslErrorHandler?, error: SslError?) {
+                alertBuilder = AlertDialog.Builder(this@AboutActivity)
+                alertBuilder?.setTitle("Warning")
+                alertBuilder?.setMessage(getString(R.string.ssl_warning))
+                alertBuilder?.setPositiveButton("proceed"){dialog, _ ->
+                    handler?.proceed()
+                    dialog.dismiss()
+                }
+                alertBuilder?.setNegativeButton("cancel"){dialog, _ ->
+                    handler?.cancel()
+                    dialog.dismiss()
+                }
+                alertBuilder?.setCancelable(false)
+                alertBuilder?.show()
+            }
+
             override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
                 super.onReceivedError(view, request, error)
                 toast(error.toString())
@@ -60,20 +79,7 @@ class AboutActivity : AppCompatActivity() {
         val webSettings = webView?.settings
         webSettings?.javaScriptEnabled = true
         webSettings?.useWideViewPort = true
-        webSettings?.loadWithOverviewMode = true
-        webSettings?.domStorageEnabled = true
-        webView?.isHorizontalScrollBarEnabled = true
-        webSettings?.setAppCacheEnabled(true)
-        webSettings?.databaseEnabled = true
-        webView?.isVerticalScrollBarEnabled = false
-        webSettings?.builtInZoomControls = true
-        webSettings?.displayZoomControls = false
-        webSettings?.allowFileAccess = true
-        webView?.isScrollbarFadingEnabled = false
-        webSettings?.cacheMode = WebSettings.LOAD_NO_CACHE
-        webView?.webViewClient = WebViewClient()
-        webView?.setInitialScale(1)
-        webView?.loadUrl("https://andela.com/alc/")
+        webView?.loadUrl(getString(R.string.andela_about_page_url))
     }
 
     override fun onSupportNavigateUp(): Boolean {

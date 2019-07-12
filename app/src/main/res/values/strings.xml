@@ -11,4 +11,5 @@
     <string name="des_profile_image">profile_image</string>
     <string name="andela_about_page_url">https://andela.com/alc/</string>
     <string name="connectivty_error">No Internet connection</string>
+    <string name="ssl_warning">The site you\'re trying to access is not safe. Do you want to proceed any way?</string>
 </resources>
